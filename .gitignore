@@ -1,0 +1,7 @@
+### 1.11 `.gitignore`
+.gsc/
+pycache/
+*.pyc
+*.pyo
+.vscode/
+.DS_Store
