@@ -1,0 +1,69 @@
+#!/usr/bin/env python3
+"""
+GSC - Main dispatcher
+Usage: gsc <command> [args...]
+This script delegates each command to a separate module in the `commands/` folder.
+"""
+
+import sys
+import os
+
+# commands folder name
+COMMANDS_PKG = "commands"
+
+def available_commands():
+    commands_dir = os.path.join(os.path.dirname(__file__), COMMANDS_PKG)
+    if not os.path.isdir(commands_dir):
+        return []
+    names = []
+    for fname in os.listdir(commands_dir):
+        if fname.endswith(".py") and fname != "__init__.py":
+            names.append(fname[:-3])
+    return sorted(names)
+
+def print_help():
+    print("GSC - Tiny Git-Style Control")
+    print("Usage: gsc <command> [options]")
+    print("Available commands:")
+    for c in available_commands():
+        print("  -", c)
+    print("\nRun `gsc help <command>` for command details.")
+
+def run_command(cmd_name, args):
+    try:
+        module_name = f"{COMMANDS_PKG}.{cmd_name}"
+        module = __import__(module_name, fromlist=["*"])
+    except ImportError:
+        print(f"Unknown command: {cmd_name}")
+        print_help()
+        return 2
+    if hasattr(module, "run"):
+        try:
+            return module.run(args)
+        except Exception as e:
+            print("Error while running command:", e)
+            return 1
+    else:
+        print(f"Command module '{cmd_name}' has no run(args) function.")
+        return 1
+
+def main():
+    if len(sys.argv) <= 1:
+        print_help()
+        return 0
+
+    cmd = sys.argv[1].lower()
+    args = sys.argv[2:]
+
+    if cmd == "help":
+        if len(args) == 0:
+            print_help()
+            return 0
+        else:
+            return run_command("help", [args[0]])
+    else:
+        return run_command(cmd, args)
+
+
+if __name__ == "__main__":
+    sys.exit(main())
