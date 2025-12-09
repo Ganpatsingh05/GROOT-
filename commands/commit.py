@@ -5,6 +5,7 @@ Usage:
   gsc commit -m "your message"
 """
 
+from logging import log
 import os
 import json
 import shutil
@@ -74,6 +75,21 @@ def run(args):
         except Exception as e:
             print("Error copying", rel, e)
 
+    # entry = {
+    #     "id": commit_id,
+    #     "message": message,
+    #     "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+    #     "files": copied
+    # }
+    # log.append(entry)
+    # save_json(log_path, log)
+
+    # # clear index
+    # save_json(index_path, [])
+
+    # print(f"Committed as commit_{commit_id}: {message}")
+    # return 0
+
     entry = {
         "id": commit_id,
         "message": message,
@@ -86,5 +102,8 @@ def run(args):
     # clear index
     save_json(index_path, [])
 
-    print(f"Committed as commit_{commit_id}: {message}")
+    print(f"Committed as commit_{commit_id}: \"{message}\"")
+    print(f"Files committed: {len(copied)}")
+    if len(copied) < len(staged):
+        print("Note: some staged files were missing and skipped during commit.")
     return 0

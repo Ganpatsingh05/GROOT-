@@ -4,6 +4,7 @@ Show commit history (most recent first).
 Usage:
   gsc log
 """
+from logging import log
 import os
 import json
 
@@ -23,14 +24,31 @@ def run(args):
         print("No GSC repository here. Run `gsc init` first.")
         return 2
 
+    # log = load_json(log_path)
+    # if not log:
+    #     print("No commits yet.")
+    #     return 0
+
+    # for entry in reversed(log):
+    #     print(f"commit_{entry['id']}: {entry['message']} ({entry['timestamp']})")
+    #     for f in entry.get("files", []):
+    #         print("  -", f)
+    #     print()
+    # return 0
+
+
     log = load_json(log_path)
     if not log:
         print("No commits yet.")
         return 0
 
+    print("=== GSC Commit History ===\n")
     for entry in reversed(log):
-        print(f"commit_{entry['id']}: {entry['message']} ({entry['timestamp']})")
+        print(f"Commit: commit_{entry['id']}")
+        print(f"Message: {entry['message']}")
+        print(f"Date: {entry['timestamp']}")
+        print("Files:")
         for f in entry.get("files", []):
             print("  -", f)
-        print()
+        print("-" * 40)
     return 0
