@@ -5,7 +5,6 @@ Usage:
   gsc commit -m "your message"
 """
 
-from logging import log
 import os
 import json
 import shutil
@@ -14,16 +13,22 @@ from datetime import datetime
 USAGE = __doc__
 
 def load_json(path):
+    """Load JSON data using utf-8-sig to tolerate BOMs. Return [] if file missing or invalid."""
     if not os.path.exists(path):
         return []
-    with open(path, "r", encoding="utf-8") as f:
-        return json.load(f)
+    try:
+        with open(path, "r", encoding="utf-8-sig") as f:
+            return json.load(f)
+    except (json.JSONDecodeError, UnicodeDecodeError):
+        return []
 
 def save_json(path, data):
+    """Save JSON using utf-8 (no BOM)."""
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=4)
 
 def copy_item(src, dst):
+    """Copy a file or directory preserving structure."""
     if os.path.isdir(src):
         shutil.copytree(src, dst)
     else:
@@ -37,9 +42,13 @@ def run(args):
         return 2
     try:
         m_index = args.index("-m") + 1
-        message = " ".join(args[m_index:])
+        message = " ".join(args[m_index:]).strip()
     except Exception:
         print("Please provide a message: gsc commit -m \"message\"")
+        return 2
+
+    if not message:
+        print("Commit message cannot be empty.")
         return 2
 
     cwd = os.getcwd()
@@ -53,10 +62,36 @@ def run(args):
     commits_dir = os.path.join(gsc_dir, "commits")
 
     staged = load_json(index_path)
+
+    # If index file is empty or missing
     if not staged:
         print("Nothing to commit. Staging area is empty.")
         return 0
 
+    # ------------------------
+    # Pre-clean staged entries
+    # ------------------------
+    existing = []
+    missing = []
+    for rel in staged:
+        if os.path.exists(os.path.join(cwd, rel)):
+            existing.append(rel)
+        else:
+            missing.append(rel)
+
+    if missing:
+        print("Warning: the following staged items are missing and will be skipped:")
+        for m in missing:
+            print("  -", m)
+        # overwrite staged with only existing before proceeding
+        staged = existing
+        save_json(index_path, staged)
+
+    if not staged:
+        print("Nothing to commit after cleaning missing staged files.")
+        return 0
+
+    # Load commit log and prepare new commit folder
     log = load_json(log_path)
     commit_id = len(log) + 1
     commit_folder = os.path.join(commits_dir, f"commit_{commit_id}")
@@ -66,6 +101,7 @@ def run(args):
     for rel in staged:
         src = os.path.join(cwd, rel)
         if not os.path.exists(src):
+            # This should be rare because of pre-clean, but keep the check
             print("Warning: staged item no longer exists, skipping:", rel)
             continue
         dest = os.path.join(commit_folder, rel)
@@ -74,21 +110,6 @@ def run(args):
             copied.append(rel)
         except Exception as e:
             print("Error copying", rel, e)
-
-    # entry = {
-    #     "id": commit_id,
-    #     "message": message,
-    #     "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-    #     "files": copied
-    # }
-    # log.append(entry)
-    # save_json(log_path, log)
-
-    # # clear index
-    # save_json(index_path, [])
-
-    # print(f"Committed as commit_{commit_id}: {message}")
-    # return 0
 
     entry = {
         "id": commit_id,
@@ -102,8 +123,25 @@ def run(args):
     # clear index
     save_json(index_path, [])
 
+    # Summary output
     print(f"Committed as commit_{commit_id}: \"{message}\"")
     print(f"Files committed: {len(copied)}")
-    if len(copied) < len(staged):
+
+    # compute skipped items (staged but not copied + missing)
+    skipped = 0
+    try:
+        skipped = (len(existing) - len(copied)) + len(missing)
+    except Exception:
+        # fallback: compare staged vs copied if existing/missing not available
+        try:
+            skipped = max(0, len(staged) - len(copied))
+        except Exception:
+            skipped = 0
+
+    if skipped > 0:
+        print(f"Note: {skipped} staged item(s) were skipped (missing or copy error).")
+    elif len(copied) < len(staged):
+        # defensive fallback message if counts don't align exactly
         print("Note: some staged files were missing and skipped during commit.")
+
     return 0
