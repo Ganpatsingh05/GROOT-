@@ -14,8 +14,12 @@ USAGE = __doc__
 def load_index(index_path):
     if not os.path.exists(index_path):
         return []
-    with open(index_path, "r", encoding="utf-8") as f:
-        return json.load(f)
+    with open(index_path, "r", encoding="utf-8-sig") as f:
+        try:
+            return json.load(f)
+        except json.JSONDecodeError:
+            return []
+
 
 def save_index(index_path, data):
     with open(index_path, "w", encoding="utf-8") as f:
@@ -40,7 +44,8 @@ def run(args):
 
     index = load_index(index_path)
     # store relative path (as user typed)
-    rel = os.path.relpath(full_target, cwd)
+    # rel = os.path.relpath(full_target, cwd)
+    rel = os.path.normpath(os.path.relpath(full_target, cwd))
     if rel in index:
         print("Already staged:", rel)
         return 0

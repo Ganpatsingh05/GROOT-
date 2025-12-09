@@ -26,8 +26,14 @@ def run(args):
         print("GSC repository already initialized in", cwd)
         return 0
 
-    os.makedirs(os.path.join(gsc_path, COMMITS_DIR), exist_ok=True)
-    write_json(os.path.join(gsc_path, INDEX_FILE), [])
-    write_json(os.path.join(gsc_path, LOG_FILE), [])
-    print("Initialized empty GSC repository in", gsc_path)
+    try:
+        os.makedirs(os.path.join(gsc_path, COMMITS_DIR), exist_ok=True)
+        write_json(os.path.join(gsc_path, INDEX_FILE), [])
+        write_json(os.path.join(gsc_path, LOG_FILE), [])
+    except PermissionError:
+        print("Error: cannot create .gsc in this folder (permission denied). Try running the command in a writable directory.")
+        return 1
+
+    print("Initialized empty GSC repository at:", gsc_path)
+    print("You can now run: gsc add <file>  and  gsc commit -m \"message\"")
     return 0
