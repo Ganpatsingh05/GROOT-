@@ -1,10 +1,10 @@
 @echo off
 mkdir demo_commit_log
 cd demo_commit_log
-gsc init
+groot init
 echo a > a.txt
 echo b > b.txt
-gsc add a.txt
-gsc add b.txt
-gsc commit -m "two files commit"
-gsc log
+groot add a.txt
+groot add b.txt
+groot commit -m "two files commit"
+groot log

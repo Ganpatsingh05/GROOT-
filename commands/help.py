@@ -1,8 +1,8 @@
 """
-help command for GSC
+help command for GROOT
 Usage:
-  gsc help            -> show all commands
-  gsc help <command>  -> show usage for a specific command
+  groot help            -> show all commands
+  groot help <command>  -> show usage for a specific command
 """
 import importlib
 import os
@@ -36,7 +36,7 @@ def run(args):
     from pathlib import Path
     pkg_dir = Path(__file__).parent
     files = [p.stem for p in pkg_dir.glob("*.py") if p.name != "__init__.py"]
-    print("GSC help: available commands\n")
+    print("GROOT help: available commands\n")
     for f in sorted(files):
         try:
             mod = importlib.import_module(f"commands.{f}")
@@ -44,5 +44,5 @@ def run(args):
         except Exception:
             desc = ""
         print(f"{f:12} - {desc}")
-    print("\nRun `gsc help <command>` to see detailed usage for a command.")
+    print("\nRun `groot help <command>` to see detailed usage for a command.")
     return 0

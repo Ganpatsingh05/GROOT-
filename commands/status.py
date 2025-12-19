@@ -1,8 +1,8 @@
 """
-gsc status
+groot status
 Show staged files (the index).
 Usage:
-  gsc status
+  groot status
 """
 import os
 import json
@@ -17,11 +17,11 @@ def load_json(path):
 
 def run(args):
     cwd = os.getcwd()
-    gsc_dir = os.path.join(cwd, ".gsc")
-    if not os.path.isdir(gsc_dir):
-        print("No GSC repository here. Run `gsc init` first.")
+    groot_dir = os.path.join(cwd, ".groot")
+    if not os.path.isdir(groot_dir):
+        print("No GROOT repository here. Run `groot init` first.")
         return 2
-    index = load_json(os.path.join(gsc_dir, "index.json"))
+    index = load_json(os.path.join(groot_dir, "index.json"))
     if not index:
         print("Staging area is empty.")
         return 0

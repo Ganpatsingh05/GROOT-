@@ -1,9 +1,9 @@
 """
-gsc add <path>
+groot add <path>
 Adds a file or folder path to the staging area (index.json).
 Usage:
-  gsc add filename.txt
-  gsc add folder_name/
+  groot add filename.txt
+  groot add folder_name/
 """
 
 import os
@@ -27,14 +27,14 @@ def save_index(index_path, data):
 
 def run(args):
     if not args:
-        print("Usage: gsc add <path>")
+        print("Usage: groot add <path>")
         return 2
     target = args[0]
     cwd = os.getcwd()
-    gsc_dir = os.path.join(cwd, ".gsc")
-    index_path = os.path.join(gsc_dir, "index.json")
-    if not os.path.isdir(gsc_dir):
-        print("No GSC repository here. Run `gsc init` first.")
+    groot_dir = os.path.join(cwd, ".groot")
+    index_path = os.path.join(groot_dir, "index.json")
+    if not os.path.isdir(groot_dir):
+        print("No GROOT repository here. Run `groot init` first.")
         return 2
 
     full_target = os.path.join(cwd, target)

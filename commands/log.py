@@ -1,8 +1,8 @@
 """
-gsc log
+groot log
 Show commit history (most recent first).
 Usage:
-  gsc log
+  groot log
 """
 from logging import log
 import os
@@ -18,10 +18,10 @@ def load_json(path):
 
 def run(args):
     cwd = os.getcwd()
-    gsc_dir = os.path.join(cwd, ".gsc")
-    log_path = os.path.join(gsc_dir, "log.json")
-    if not os.path.isdir(gsc_dir):
-        print("No GSC repository here. Run `gsc init` first.")
+    groot_dir = os.path.join(cwd, ".groot")
+    log_path = os.path.join(groot_dir, "log.json")
+    if not os.path.isdir(groot_dir):
+        print("No GROOT repository here. Run `groot init` first.")
         return 2
 
     # log = load_json(log_path)
@@ -42,7 +42,7 @@ def run(args):
         print("No commits yet.")
         return 0
 
-    print("=== GSC Commit History ===\n")
+    print("=== GROOT Commit History ===\n")
     for entry in reversed(log):
         print(f"Commit: commit_{entry['id']}")
         print(f"Message: {entry['message']}")

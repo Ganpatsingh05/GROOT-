@@ -1,8 +1,8 @@
 """
-gsc commit -m "message"
+groot commit -m "message"
 Create a commit snapshot by copying staged files to a new commits/commit_N folder.
 Usage:
-  gsc commit -m "your message"
+  groot commit -m "your message"
 """
 
 import os
@@ -38,13 +38,13 @@ def copy_item(src, dst):
 def run(args):
     # parse message
     if "-m" not in args:
-        print("Usage: gsc commit -m \"message\"")
+        print("Usage: groot commit -m \"message\"")
         return 2
     try:
         m_index = args.index("-m") + 1
         message = " ".join(args[m_index:]).strip()
     except Exception:
-        print("Please provide a message: gsc commit -m \"message\"")
+        print("Please provide a message: groot commit -m \"message\"")
         return 2
 
     if not message:
@@ -52,14 +52,14 @@ def run(args):
         return 2
 
     cwd = os.getcwd()
-    gsc_dir = os.path.join(cwd, ".gsc")
-    if not os.path.isdir(gsc_dir):
-        print("No GSC repository here. Run `gsc init` first.")
+    groot_dir = os.path.join(cwd, ".groot")
+    if not os.path.isdir(groot_dir):
+        print("No GROOT repository here. Run `groot init` first.")
         return 2
 
-    index_path = os.path.join(gsc_dir, "index.json")
-    log_path = os.path.join(gsc_dir, "log.json")
-    commits_dir = os.path.join(gsc_dir, "commits")
+    index_path = os.path.join(groot_dir, "index.json")
+    log_path = os.path.join(groot_dir, "log.json")
+    commits_dir = os.path.join(groot_dir, "commits")
 
     staged = load_json(index_path)
 

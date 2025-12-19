@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-GSC - Main dispatcher
-Usage: gsc <command> [args...]
+GROOT - Main dispatcher
+Usage: groot <command> [args...]
 This script delegates each command to a separate module in the `commands/` folder.
 """
 
@@ -22,12 +22,12 @@ def available_commands():
     return sorted(names)
 
 def print_help():
-    print("GSC - Tiny Git-Style Control")
-    print("Usage: gsc <command> [options]")
+    print("GROOT - Tiny Git-Style Control")
+    print("Usage: groot <command> [options]")
     print("Available commands:")
     for c in available_commands():
         print("  -", c)
-    print("\nRun `gsc help <command>` for command details.")
+    print("\nRun `groot help <command>` for command details.")
 
 def run_command(cmd_name, args):
     try:

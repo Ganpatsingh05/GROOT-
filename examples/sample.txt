@@ -1,2 +1,2 @@
-Hello GSC
+Hello GROOT
 This is a sample file for testing.

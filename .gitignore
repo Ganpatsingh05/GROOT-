@@ -1,5 +1,5 @@
 ### 1.11 `.gitignore`
-.gsc/
+.groot/
 pycache/
 *.pyc
 *.pyo
