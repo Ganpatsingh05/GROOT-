@@ -22,7 +22,7 @@ def available_commands():
     return sorted(names)
 
 def print_help():
-    print("GROOT - Tiny Git-Style Control")
+    print("GROOT - Git-Inspired Repository & Object Organizer Tool")
     print("Usage: groot <command> [options]")
     print("Available commands:")
     for c in available_commands():
