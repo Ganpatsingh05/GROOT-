@@ -1,48 +1,50 @@
 """
-help command for GROOT
+groot help
+Shows all available commands with descriptions.
 Usage:
-  groot help            -> show all commands
-  groot help <command>  -> show usage for a specific command
+  groot help
+  groot help <command>
 """
 import importlib
 import os
 
-# def run(args):
-#     if not args:
-#         # list commands and short descriptions
-#         from pathlib import Path
-#         pkg_dir = Path(__file__).parent
-#         files = [p.stem for p in pkg_dir.glob("*.py") if p.name != "__init__.py"]
-#         print("GSC help: available commands\n")
-#         for f in sorted(files):
-#             print("-", f)
-#         print("\nRun `gsc help <command>` to see detailed usage for a command.")
-#         return 0
+USAGE = __doc__
 
-#     cmd = args[0]
-#     try:
-#         mod = importlib.import_module(f"commands.{cmd}")
-#     except Exception:
-#         print("No help available for unknown command:", cmd)
-#         return 2
-
-#     if hasattr(mod, "USAGE"):
-#         print(mod.USAGE)
-#     else:
-#         print("No usage string defined for command:", cmd)
-#     return 0
 
 def run(args):
     from pathlib import Path
+    
+    # ASCII art for GROOT
+    groot_ascii = r"""
+   _____ _____   ____   ____ _______
+  / ____|  __ \ / __ \ / __ \__   __|
+ | |  __| |__) | |  | | |  | | | |   
+ | | |_ |  _  /| |  | | |  | | | |   
+ | |__| | | \ \| |__| | |__| | | |   
+  \_____|_|  \_\\____/ \____/  |_|   
+                                      
+  Git-Inspired Repository & Object Organizer Tool
+"""
+    
+    print(groot_ascii)
+    
     pkg_dir = Path(__file__).parent
     files = [p.stem for p in pkg_dir.glob("*.py") if p.name != "__init__.py"]
-    print("GROOT help: available commands\n")
+    print("Available Commands:")
+    print("=" * 60)
     for f in sorted(files):
         try:
             mod = importlib.import_module(f"commands.{f}")
-            desc = getattr(mod, "USAGE", "").strip().splitlines()[0]
+            usage_text = getattr(mod, "USAGE", "")
+            if usage_text:
+                # Get the first meaningful line (usually the command description)
+                lines = [line.strip() for line in usage_text.strip().splitlines() if line.strip()]
+                desc = lines[1] if len(lines) > 1 else lines[0] if lines else "No description"
+            else:
+                desc = "No description"
         except Exception:
-            desc = ""
-        print(f"{f:12} - {desc}")
-    print("\nRun `groot help <command>` to see detailed usage for a command.")
+            desc = "No description"
+        print(f"  {f:12} - {desc}")
+    print("=" * 60)
+    print("\nRun 'groot help <command>' for detailed usage of a command.")
     return 0

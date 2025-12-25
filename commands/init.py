@@ -35,5 +35,5 @@ def run(args):
         return 1
 
     print("Initialized empty GROOT repository at:", groot_path)
-    print("You can now run: groot add <file>  and  groot commit -m \"message\"")")
+    print("You can now run: groot add <file>  and  groot commit -m \"message\"")
     return 0

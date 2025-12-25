@@ -30,10 +30,14 @@ def save_json(path, data):
 def copy_item(src, dst):
     """Copy a file or directory preserving structure."""
     if os.path.isdir(src):
-        shutil.copytree(src, dst)
+        # Skip if trying to copy current directory or .groot directory
+        if os.path.basename(src) == '.groot' or os.path.samefile(src, os.getcwd()):
+            return False
+        shutil.copytree(src, dst, ignore=shutil.ignore_patterns('.groot'))
     else:
         os.makedirs(os.path.dirname(dst), exist_ok=True)
         shutil.copy2(src, dst)
+    return True
 
 def run(args):
     # parse message
@@ -98,18 +102,30 @@ def run(args):
     os.makedirs(commit_folder, exist_ok=True)
 
     copied = []
+    skipped_invalid = []
     for rel in staged:
         src = os.path.join(cwd, rel)
         if not os.path.exists(src):
             # This should be rare because of pre-clean, but keep the check
             print("Warning: staged item no longer exists, skipping:", rel)
             continue
+        
+        # Skip "." (current directory) 
+        if rel == "." or os.path.normpath(rel) == ".":
+            print("Warning: Cannot commit current directory '.', skipping")
+            skipped_invalid.append(rel)
+            continue
+            
         dest = os.path.join(commit_folder, rel)
         try:
-            copy_item(src, dest)
-            copied.append(rel)
+            if copy_item(src, dest):
+                copied.append(rel)
+            else:
+                print(f"Warning: skipped invalid path: {rel}")
+                skipped_invalid.append(rel)
         except Exception as e:
             print("Error copying", rel, e)
+            skipped_invalid.append(rel)
 
     entry = {
         "id": commit_id,

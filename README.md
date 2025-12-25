@@ -1,8 +1,6 @@
 <div align="center">
 
-<img src="GROOT_logo2.png" alt="GROOT Logo" width="150"/>
-
-# GROOT  
+# <img src="GROOT_icon2.png" alt="GROOT Icon" width="60" style="vertical-align: middle;"/> GROOT  
 ## Git-Inspired Repository & Object Organizer Tool
 
 [![Python](https://img.shields.io/badge/Python-3.x-blue.svg)](https://www.python.org/)
@@ -12,7 +10,7 @@
 
 **A beginner-friendly, command-line based version control system developed for educational purposes.**
 
-GROOT demonstrates the internal working of version control systems by implementing core concepts such as repository initialization, staging, committing, branching, merging, and conflict resolution.
+GROOT demonstrates the internal working of version control systems by implementing core concepts such as repository initialization, staging, committing, branching, and merging.
 
 ![GROOT Banner](GROOT_banner2.png)
 
@@ -28,7 +26,6 @@ GROOT demonstrates the internal working of version control systems by implementi
 - [Installation & Setup](#-installation--setup)
 - [Commands and Usage](#-commands-and-usage)
 - [Branching and Merging](#-branching-and-merging)
-- [Merge Conflict Resolution](#️-merge-conflict-resolution)
 - [Version Tags](#️-version-tags)
 - [GitHub Integration](#-github-integration)
 - [Learning Outcomes](#-learning-outcomes)
@@ -39,11 +36,11 @@ GROOT demonstrates the internal working of version control systems by implementi
 
 ## 📌 Project Objectives
 
-This project was developed as part of the **INT 331 – Version Control Systems** course with the following objectives:
+This project was developed as part of the **INT 331 – Fundamentals Of Devops** course with the following objectives:
 
 - ✅ Understand the internal working of version control systems  
 - ✅ Implement core VCS concepts using Python  
-- ✅ Demonstrate branching, merging, and conflict resolution  
+- ✅ Demonstrate branching and merging  
 - ✅ Use Git Bash and GitHub for real project versioning  
 - ✅ Develop comprehensive documentation following academic standards  
 
@@ -94,7 +91,6 @@ gsc-project/
 └── tests/                       # Test scripts and demos
     ├── init_add_demo.cmd       # Demo: init and add commands
     ├── commit_log_demo.cmd     # Demo: commit and log commands
-    ├── bugfix_missing.cmd      # Demo: bugfix workflow
     └── tests_commands.md       # Test documentation
 ```
 
@@ -125,8 +121,8 @@ gsc-project/
    groot --help
    ```
 
-![Installation Success](docs/screenshots/install-help.png)
-> *Screenshot placeholder: Terminal showing successful `groot --help` output*
+![Installation Success](docs/screenshots/groot-1.jpg)
+> *Screenshot : Terminal showing successful `groot --help` output*
 
 For detailed installation instructions, see [INSTALL_WINDOWS.md](docs/INSTALL_WINDOWS.md).
 
@@ -142,8 +138,8 @@ groot init
 
 Creates a `.groot/` directory in the current folder to initialize version control.
 
-![groot init](docs/screenshots/groot-init.png)
-> *Screenshot placeholder: Output of `groot init` showing directory creation*
+![groot init](docs/screenshots/groot-init.jpg)
+> *Screenshot : Output of `groot init` showing directory creation*
 
 ---
 
@@ -163,8 +159,8 @@ groot add example.txt
 groot add examples/
 ```
 
-![groot add](docs/screenshots/groot-add.png)
-> *Screenshot placeholder: Output of `groot add` showing files staged*
+![groot add](docs/screenshots/groot-add.jpg)
+> *Screenshot : Output of `groot add` showing files staged*
 
 ---
 
@@ -181,8 +177,8 @@ Creates a snapshot of staged files and stores it in commit history.
 groot commit -m "Initial commit with example files"
 ```
 
-![groot commit](docs/screenshots/groot-commit.png)
-> *Screenshot placeholder: Output of `groot commit` showing successful commit*
+![groot commit](docs/screenshots/groot-commit.jpg)
+> *Screenshot : Output of `groot commit` showing successful commit*
 
 ---
 
@@ -194,8 +190,8 @@ groot log
 
 Displays the list of all commits with timestamps and messages.
 
-![groot log](docs/screenshots/groot-log.png)
-> *Screenshot placeholder: Output of `groot log` showing commit history*
+![groot log](docs/screenshots/groot-log.jpg)
+> *Screenshot : Output of `groot log` showing commit history*
 
 ---
 
@@ -207,8 +203,8 @@ groot status
 
 Shows currently staged files and repository state.
 
-![groot status](docs/screenshots/groot-status.png)
-> *Screenshot placeholder: Output of `groot status` showing staged files*
+![groot status](docs/screenshots/groot-status.jpg)
+> *Screenshot : Output of `groot status` showing staged files*
 
 ---
 
@@ -218,7 +214,6 @@ The project demonstrates Git branching workflows through multiple feature branch
 
 - `feature/init-add` – Init and Add commands implementation
 - `feature/commit-log` – Commit and Log commands implementation
-- `bugfix/missing-files` – Bug fixes for missing file handling
 
 **Branch Creation and Merging Example:**
 
@@ -231,54 +226,11 @@ git checkout main
 git merge feature/init-add
 ```
 
-![Git Branches](docs/screenshots/git-branches.png)
+![Git Branches](docs/screenshots/branch.png)
 > *Screenshot placeholder: `git branch` output showing multiple branches*
 
 ![Successful Merge](docs/screenshots/git-merge-success.png)
 > *Screenshot placeholder: Terminal showing successful merge output*
-
----
-
-## ⚠️ Merge Conflict Resolution
-
-A merge conflict was **intentionally created** to demonstrate conflict resolution skills.
-
-**Conflict Creation:**
-- Modified `README.md` in two different branches
-- Attempted to merge branches with conflicting changes
-
-```bash
-git merge conflict-demo
-```
-
-![Merge Conflict](docs/screenshots/merge-conflict-terminal.png)
-> *Screenshot placeholder: Terminal output showing merge conflict error*
-
-**Conflict Markers in File:**
-
-```
-<<<<<<< HEAD
-This is the main branch version
-=======
-This is the conflict-demo branch version
->>>>>>> conflict-demo
-```
-
-![Conflict Markers](docs/screenshots/conflict-markers.png)
-> *Screenshot placeholder: File showing conflict markers*
-
-**Resolution:**
-- Manually edited the file to resolve conflicts
-- Removed conflict markers
-- Committed the resolved version
-
-```bash
-git add README.md
-git commit -m "Resolved merge conflict in README.md"
-```
-
-![Conflict Resolved](docs/screenshots/conflict-resolved.png)
-> *Screenshot placeholder: `git status` showing clean working tree after resolution*
 
 ---
 
@@ -289,8 +241,7 @@ Git tags were used to mark major project milestones:
 | Tag | Description |
 |-----|-------------|
 | `v0.1-init` | Initial working version with basic commands |
-| `v0.2-branches` | All feature, bugfix, and experiment branches merged |
-| `v0.3-conflict-resolved` | Merge conflict demonstrated and resolved |
+| `v0.2-branches` | All feature branches merged |
 | `v1.0-final` | Final submission-ready version |
 
 **Create and Push Tags:**
@@ -299,7 +250,7 @@ git tag v1.0-final
 git push origin --tags
 ```
 
-![Git Tags](docs/screenshots/git-tags-local.png)
+![Git Tags](docs/screenshots/tag.png)
 > *Screenshot placeholder: Output of `git tag` showing all tags*
 
 ---
@@ -321,15 +272,6 @@ git push origin --all
 git push origin --tags
 ```
 
-![GitHub Repository](docs/screenshots/github-repo-homepage.png)
-> *Screenshot placeholder: GitHub repository homepage*
-
-![GitHub Branches](docs/screenshots/github-branches-page.png)
-> *Screenshot placeholder: GitHub branches page showing all branches*
-
-![GitHub Tags](docs/screenshots/github-tags-releases.png)
-> *Screenshot placeholder: GitHub tags/releases page*
-
 ---
 
 ## 🧠 Learning Outcomes
@@ -342,7 +284,6 @@ Through the development of GROOT, the following competencies were achieved:
 
 2. **Practical Skills**
    - Hands-on experience with branching and merging workflows
-   - Practical exposure to merge conflict identification and resolution
    - Experience in building a CLI tool with Python
 
 3. **Professional Development**
@@ -359,14 +300,13 @@ Through the development of GROOT, the following competencies were achieved:
 
 ## ✅ Conclusion
 
-The **GROOT project** successfully demonstrates the fundamental concepts of version control systems through a simplified and educational approach. By implementing core features such as commits, branching, merging, conflict resolution, and remote cloning, the project bridges the gap between theoretical knowledge and practical understanding.
+The **GROOT project** successfully demonstrates the fundamental concepts of version control systems through a simplified and educational approach. By implementing core features such as commits, branching, and merging, the project bridges the gap between theoretical knowledge and practical understanding.
 
 The use of Git Bash and GitHub throughout the development process ensured real-world exposure to professional version control workflows. GROOT fulfills all academic requirements of the **INT 331 – Fundamentals Of Devops** course and serves as an effective learning tool for beginners seeking to understand how version control works "under the hood."
 
 ### Key Achievements:
 - ✅ All core VCS commands implemented and tested
 - ✅ Branching and merging workflows demonstrated
-- ✅ Merge conflicts created, documented, and resolved
 - ✅ Version tags applied to mark milestones
 - ✅ Complete GitHub integration with remote repository
 - ✅ Comprehensive documentation and screenshots

@@ -49,20 +49,16 @@ def run_command(cmd_name, args):
 
 def main():
     if len(sys.argv) <= 1:
-        print_help()
+        # Simple message when just 'groot' is typed
+        print("GROOT - Git-Inspired Repository & Object Organizer Tool")
+        print("\nUsage: groot <command> [options]")
+        print("\nType 'groot help' to see all available commands.")
         return 0
 
     cmd = sys.argv[1].lower()
     args = sys.argv[2:]
 
-    if cmd == "help":
-        if len(args) == 0:
-            print_help()
-            return 0
-        else:
-            return run_command("help", [args[0]])
-    else:
-        return run_command(cmd, args)
+    return run_command(cmd, args)
 
 
 if __name__ == "__main__":
