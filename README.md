@@ -1,6 +1,8 @@
 <div align="center">
 
-# 🌳 GROOT  
+<img src="GROOT_logo2.png" alt="GROOT Logo" width="150"/>
+
+# GROOT  
 ## Git-Inspired Repository & Object Organizer Tool
 
 [![Python](https://img.shields.io/badge/Python-3.x-blue.svg)](https://www.python.org/)
@@ -12,7 +14,7 @@
 
 GROOT demonstrates the internal working of version control systems by implementing core concepts such as repository initialization, staging, committing, branching, merging, and conflict resolution.
 
-![GROOT Banner](GROOT_banner.png)
+![GROOT Banner](GROOT_banner2.png)
 
 </div>
 
@@ -430,7 +432,7 @@ Potential enhancements for GROOT:
 ### 👨‍💻 Developed By
 
 **Ganpat Singh**  
-INT 331 – Fundamentals Of Devops 
+INT 331 – Fundamentals Of Devops    
 Lovely Professional University  
 Academic Year 2025-2026
 
