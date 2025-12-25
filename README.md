@@ -1,6 +1,6 @@
 <div align="center">
 
-# <img src="GROOT_icon2.png" alt="GROOT Icon" width="60" style="vertical-align: middle;"/> GROOT  
+# <img src="groot_icon2.png" alt="GROOT Icon" width="60" style="vertical-align: middle;"/> GROOT  
 ## Git-Inspired Repository & Object Organizer Tool
 
 [![Python](https://img.shields.io/badge/Python-3.x-blue.svg)](https://www.python.org/)
