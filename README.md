@@ -10,10 +10,9 @@
 
 **A beginner-friendly, command-line based version control system developed for educational purposes.**
 
-GROOT demonstrates the internal working of version control systems by implementing core concepts such as repository initialization, staging, committing, branching, merging, conflict resolution, and remote cloning.
+GROOT demonstrates the internal working of version control systems by implementing core concepts such as repository initialization, staging, committing, branching, merging, and conflict resolution.
 
-![GROOT Banner](docs/screenshots/banner.png)
-> *Screenshot placeholder: Add a banner image showing GROOT logo or terminal output*
+![GROOT Banner](GROOT_banner.png)
 
 </div>
 
@@ -28,7 +27,6 @@ GROOT demonstrates the internal working of version control systems by implementi
 - [Commands and Usage](#-commands-and-usage)
 - [Branching and Merging](#-branching-and-merging)
 - [Merge Conflict Resolution](#️-merge-conflict-resolution)
-- [Remote Clone Feature](#-remote-clone-feature)
 - [Version Tags](#️-version-tags)
 - [GitHub Integration](#-github-integration)
 - [Learning Outcomes](#-learning-outcomes)
@@ -219,7 +217,6 @@ The project demonstrates Git branching workflows through multiple feature branch
 - `feature/init-add` – Init and Add commands implementation
 - `feature/commit-log` – Commit and Log commands implementation
 - `bugfix/missing-files` – Bug fixes for missing file handling
-- `experiment/clone` – Remote clone feature (experimental)
 
 **Branch Creation and Merging Example:**
 
@@ -283,32 +280,7 @@ git commit -m "Resolved merge conflict in README.md"
 
 ---
 
-## 🌍 Remote Clone Feature
-
-GROOT supports cloning public GitHub repositories using ZIP-based download.
-
-**Command:**
-```bash
-groot clone https://github.com/username/repository destination_folder
-```
-
-**Example:**
-```bash
-groot clone https://github.com/example/sample-repo my-project
-```
-
-![groot clone](docs/screenshots/groot-clone-output.png)
-> *Screenshot placeholder: Terminal output of `groot clone` command*
-
-![Cloned Directory](docs/screenshots/cloned-directory-structure.png)
-> *Screenshot placeholder: File explorer showing cloned repository structure*
-
-![Clone Log](docs/screenshots/groot-log-cloned-repo.png)
-> *Screenshot placeholder: `groot log` executed inside cloned repository*
-
----
-
-## 🏷️ Version Tags
+## ️ Version Tags
 
 Git tags were used to mark major project milestones:
 
@@ -387,7 +359,7 @@ Through the development of GROOT, the following competencies were achieved:
 
 The **GROOT project** successfully demonstrates the fundamental concepts of version control systems through a simplified and educational approach. By implementing core features such as commits, branching, merging, conflict resolution, and remote cloning, the project bridges the gap between theoretical knowledge and practical understanding.
 
-The use of Git Bash and GitHub throughout the development process ensured real-world exposure to professional version control workflows. GROOT fulfills all academic requirements of the **INT 331 – Version Control Systems** course and serves as an effective learning tool for beginners seeking to understand how version control works "under the hood."
+The use of Git Bash and GitHub throughout the development process ensured real-world exposure to professional version control workflows. GROOT fulfills all academic requirements of the **INT 331 – Fundamentals Of Devops** course and serves as an effective learning tool for beginners seeking to understand how version control works "under the hood."
 
 ### Key Achievements:
 - ✅ All core VCS commands implemented and tested
@@ -403,7 +375,8 @@ The use of Git Bash and GitHub throughout the development process ensured real-w
 
 Potential enhancements for GROOT:
 
-1. **Enhanced Remote Operations**
+1. **Remote Clone Feature**
+   - Clone public GitHub repositories using ZIP-based download
    - Support for authenticated remote repositories
    - Implementation of `push` and `pull` operations
    - SSH key-based authentication
@@ -456,17 +429,17 @@ Potential enhancements for GROOT:
 
 ### 👨‍💻 Developed By
 
-**[Your Name]**  
-INT 331 – Version Control Systems  
-[Your University Name]  
-Academic Year 2024-2025
+**Ganpat Singh**  
+INT 331 – Fundamentals Of Devops 
+Lovely Professional University  
+Academic Year 2025-2026
 
 ---
 
 ### 🌟 Star this repository if you found it helpful!
 
-[![GitHub stars](https://img.shields.io/github/stars/yourusername/gsc-project.svg?style=social)](https://github.com/yourusername/gsc-project/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/yourusername/gsc-project.svg?style=social)](https://github.com/yourusername/gsc-project/network)
+[![GitHub stars](https://img.shields.io/github/stars/yourusername/gsc-project.svg?style=social)](https://github.com/Ganpatsingh05/GROOT-/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/yourusername/gsc-project.svg?style=social)](https://github.com/Ganpatsingh05/GROOT-/network)
 
 **Made with ❤️ for learning by GSR**
 
